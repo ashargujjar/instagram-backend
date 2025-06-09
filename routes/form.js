@@ -45,7 +45,7 @@ router.post(
   formController.postSignup
 );
 router.post("/updateProfile", is_auth, formController.updateProfile);
-router.get("/profile/:username", is_auth, formController.getProfile);
+router.get("/profile/:username", formController.getProfile);
 router.post("/uploadImage", is_auth, formController.uploadImage);
 router.get("/getPosts/:username", is_auth, formController.getPost);
 router.post("/search-user", is_auth, formController.searchUser);
