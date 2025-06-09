@@ -65,7 +65,10 @@ app.use((error, req, res, next) => {
   });
 });
 
+const PORT = process.env.PORT || 5000;
+
 MongoConnect(() => {
-  console.log("server running on port 3000");
-  app.listen(3000);
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
