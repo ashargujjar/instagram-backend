@@ -106,6 +106,7 @@ exports.updateProfile = async (req, res, next) => {
 };
 exports.getProfile = async (req, res, next) => {
   const username = req.params.username;
+  console.log(username);
   const profile = await Bio.getProfile(username);
   if (profile) {
     return res.status(201).json({
