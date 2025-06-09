@@ -9,7 +9,7 @@ const fs = require("fs");
 const helmet = require("helmet");
 const userAction = require("./routes/userAction");
 const path = require("path");
-const cors = require("cores");
+const cors = require("cors");
 app.use(
   cors({
     origin: "https://instagram-frontend-5hzb.onrender.com",
