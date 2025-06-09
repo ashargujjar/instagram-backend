@@ -9,7 +9,12 @@ const fs = require("fs");
 const helmet = require("helmet");
 const userAction = require("./routes/userAction");
 const path = require("path");
-
+const cors = require("cores");
+app.use(
+  cors({
+    origin: "https://instagram-frontend-5hzb.onrender.com",
+  })
+);
 // const url = cloudinary.url(); // for cloudinary
 app.use(
   helmet.contentSecurityPolicy({
@@ -46,13 +51,6 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 app.use(multer({ storage: storage }).single("image"));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
-  next();
-});
 
 app.use("/uploads", express.static("uploads"));
 app.use(form);
