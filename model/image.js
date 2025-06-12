@@ -59,7 +59,7 @@ class Post {
   static likePost(postId, userId) {
     const db = getDb();
     return db.collection("post").updateOne(
-      { _id: postId, "like.likedBy": { $ne: userId } },
+      { _id: new ObjectId(postId), "like.likedBy": { $ne: userId } },
       {
         $inc: { "like.likes": 1 },
         $push: { "like.likedBy": userId },
@@ -71,7 +71,7 @@ class Post {
     return db.collection("post").updateOne(
       { _id: new ObjectId(postId), "like.likedBy": userId },
       {
-        "like.likes": { $cond: [{ $gt: ["$like.likes", 0] }, -1, 0] },
+        $inc: { "like.likes": -1 },
         $pull: { "like.likedBy": userId },
       }
     );
