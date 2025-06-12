@@ -47,7 +47,7 @@ exports.postComment = async (req, res, next) => {
 
 exports.postLike = async (req, res, next) => {
   const postId = req.params.postId;
-  const resp = await Img.incLike(postId, req.user._id);
+  const resp = await Img.likePost(postId, req.user._id);
   if (resp) {
     return res.status(201).json({
       msg: "user liked",
@@ -56,7 +56,7 @@ exports.postLike = async (req, res, next) => {
 };
 exports.removeLike = async (req, res, next) => {
   const postId = req.params.postId;
-  const resp = await Img.decLike(postId, req.user._id);
+  const resp = await Img.disLikePost(postId, req.user._id);
   if (resp) {
     return res.status(201).json({
       msg: "user disliked",
