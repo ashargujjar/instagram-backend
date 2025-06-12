@@ -112,6 +112,10 @@ exports.getProfile = async (req, res, next) => {
     return res.status(201).json({
       bio: profile,
     });
+  } else {
+    return res.status(404).json({
+      msg: "bio does not exists",
+    });
   }
 };
 exports.uploadImage = async (req, res, next) => {
