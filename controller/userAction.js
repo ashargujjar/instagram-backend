@@ -1,5 +1,6 @@
 const Post = require("../model/image");
 const Bio = require("../model/bio");
+const Img = require("../model/image");
 const cloudinary = require("../cloudinaryConfig");
 
 const fs = require("fs");
@@ -40,6 +41,25 @@ exports.postComment = async (req, res, next) => {
   } else {
     return res.status(500).json({
       msg: "eror adding the comment",
+    });
+  }
+};
+
+exports.postLike = async (req, res, next) => {
+  const postId = req.params.postId;
+  const res = await Img.incLike(postId, req.user._id);
+  if (res) {
+    return res.status(201).json({
+      msg: "user liked",
+    });
+  }
+};
+exports.removeLike = async (req, res, next) => {
+  const postId = req.params.postId;
+  const res = await Img.decLike(postId, req.user._id);
+  if (res) {
+    return res.status(201).json({
+      msg: "user disliked",
     });
   }
 };

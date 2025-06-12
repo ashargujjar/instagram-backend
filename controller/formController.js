@@ -148,7 +148,6 @@ exports.getPost = async (req, res, next) => {
 exports.searchUser = async (req, res, next) => {
   // const userId = req.query.userId;
   const username = req.user.username;
-  console.log(username);
   const searchedUsername = req.body.searchedUsername;
   // let followed = false;
   // User.checkFollower(userId, username).then((user) => {

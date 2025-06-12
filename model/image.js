@@ -56,5 +56,25 @@ class Post {
         { $push: { comments: { username, text } } }
       );
   }
+  static likePost(postId, userId) {
+    const db = getDb();
+    return db.collection("post").updateOne(
+      { _id: postId, "like.likedBy": { $ne: userId } },
+      {
+        $inc: { "like.likes": 1 },
+        $push: { "like.likedBy": userId },
+      }
+    );
+  }
+  static disLikePost(postId, userId) {
+    const db = getDb();
+    return db.collection("post").updateOne(
+      { _id: new ObjectId(postId), "like.likedBy": userId },
+      {
+        "like.likes": { $cond: [{ $gt: ["$like.likes", 0] }, -1, 0] },
+        $pull: { "like.likedBy": userId },
+      }
+    );
+  }
 }
 module.exports = Post;
